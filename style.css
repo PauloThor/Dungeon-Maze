@@ -3,3 +3,33 @@ body {
     justify-content: center;
 }
 
+main {
+    position: relative;
+}
+
+.square {
+    width: 40px;
+    height: 40px;
+    /* position: relative; */
+}
+
+#player {
+    /* position: absolute; */
+    background-color: grey;
+}
+
+#win {
+    position: absolute;
+    z-index: 1;
+    top: 40%;
+    background-color: green;
+    width: 100%;
+    text-align: center;
+    opacity: 0.8;
+    color: white;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
