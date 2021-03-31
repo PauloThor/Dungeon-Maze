@@ -10,12 +10,13 @@ main {
 .square {
     width: 40px;
     height: 40px;
-    /* position: relative; */
 }
 
 #player {
-    /* position: absolute; */
+    width: 40px;
+    height: 40px;
     background-color: grey;
+    /* animation: slideRight 0.1s */
 }
 
 #win {
@@ -33,3 +34,39 @@ main {
 .hidden {
     display: none;
 }
+
+.slideRight {
+    animation: slideRight 0.1s;
+}
+
+@keyframes slideRight {
+    from {margin-left: 20px;}
+    to {margin-left: 0;}
+    }
+
+.slideLeft {
+    animation: slideLeft 0.1s;
+}
+
+@keyframes slideLeft {
+    from {margin-left: -20px;}
+    to {margin-left: 0;}
+    }
+
+.slideBottom {
+    animation: slideBottom 0.1s;
+}
+
+@keyframes slideBottom {
+    from {margin-top: 20px;}
+    to {margin-top: 0%;}
+    }
+
+.slideTop {
+    animation: slideTop 0.1s;
+}
+
+@keyframes slideTop {
+    from {margin-top: -20px;}
+    to {margin-top: 0%;}
+    }
