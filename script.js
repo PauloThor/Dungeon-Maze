@@ -1,19 +1,19 @@
 const map = [
-    "WWWWWWWWWWWWWWWWWWWWW",
-    "W   W     W     W W W",
-    "W W W WWW WWWWW W W W",
-    "W W W   W     W W   W",
-    "W WWWWWWW W WWW W W W",
-    "W         W     W W W",
-    "W WWW WWWWW WWWWW W W",
-    "W W   W   W W     W W",
-    "W WWWWW W W W WWW W F",
-    "S     W W W W W W WWW",
-    "WWWWW W W W W W W W W",
-    "W     W W W   W W W W",
-    "W WWWWWWW WWWWW W W W",
-    "W       W       W   W",
-    "WWWWWWWWWWWWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W   W     W     W W W     W",
+    "W W W WWW WWWWW W W W WWWWW",
+    "W W W   W     W W   W     F",
+    "W WWWWWWW W WWW W W W WWW W",
+    "W         W     W W W W W F",
+    "W WWW WWWWW WWWWW W W W W W",
+    "W W   W   W W     W W W W W",
+    "W WWWWW W W W W W W   W W W",
+    "S     W W W W W W WWW W   W",
+    "WWWWW W W W W W W W W W W W",
+    "W     W W W   W W W W W   W",
+    "W WWWWWWW WWWWW W W W W W F",
+    "W       W       W   W     W",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWW",
 ];
 
 const main = document.querySelector('main')
@@ -30,7 +30,8 @@ for (let i = 0; i < map.length; i++) {
         divLine.appendChild(div);
         div.id = `div${i}-${j}`
         if (map[i][j] === 'W') {
-            div.style.background = '#145399'
+            // div.style.background = '#145399'
+            div.classList.add('wall')
         }
         if (map[i][j] === 'S') {
             const player = document.createElement('div')
@@ -74,11 +75,22 @@ function appendPlayer() {
   currentDiv.appendChild(document.getElementById('player'))
 }
 
+const modalBg = document.querySelector('#modalBgWin')
+const modal = document.querySelector('#modalWin')
+
 function checkWin() {
   if (map[playerLine][playerColumn] === 'F') {
-    document.getElementById('win').classList.remove('hidden')
+    modal.classList.add('is-active')
   }
 }
+
+modalBg.addEventListener('click', () => {
+  modal.classList.remove('is-active')
+  const startingPosition = document.getElementById('div9-0');
+  startingPosition.appendChild(player)
+  playerLine = 9;
+  playerColumn = 0;
+})
 
 document.addEventListener('keydown', (event) => {
   if (map[playerLine][playerColumn] !== 'F') movePlayer[event.key]()
@@ -86,10 +98,55 @@ document.addEventListener('keydown', (event) => {
   checkWin()
 });
 
-document.getElementById('win').addEventListener('click', () => {
-  const startingPosition = document.getElementById('div9-0');
-  startingPosition.appendChild(player)
-  playerLine = 9;
-  playerColumn = 0;
-  document.getElementById('win').classList.add('hidden')
+
+
+
+// LEVEL BY STEPS SHOW ON THE RIGHT (guardado numa variável global)
+// MONSTERS BY LEVEL
+// GAME OVER
+// MEDIEVAL BLOCKS
+// SECRET PASSAGES (DOORS, ITEMS)
+// LOGIN WITH NICKNAME
+// PLAYER NICKNAME ON THE RIGHT
+// CONSTANT ANIMATIONS
+// HERO CLASS OF CHOICE (guardar numa variável global a classe escolhida)
+// HERO HP AND POTIONS AROUND THE MAP
+// TRAPS AROUND THE MAP
+
+
+
+function start() {
+  setInterval(() => {
+    document.getElementById('main').classList.toggle('activated')
+  }, 2000)
+}
+
+window.addEventListener('load',start)
+
+let chosenClass = 'Warrior'
+let username = 'Player'
+
+function showPlayerInfo() {
+  const playerName = document.getElementById('nickname')
+  const playerClass = document.getElementById('class')
+  const playerLevel = document.getElementById('level')
+  playerName.innerText = username
+  playerClass.innerText = chosenClass
+  playerLevel.innerText = 'Level: 1' 
+}
+
+const startGame = document.getElementById('startGame')
+startGame.addEventListener('click', () => {
+  chosenClass = document.querySelector('option:checked').value
+  username = document.querySelector('#username').value
+  document.getElementById('login').classList.remove('is-active')
+  showPlayerInfo()
+
+  const player = document.getElementById('player')
+  if (chosenClass === 'Rogue') {
+  player.style.backgroundImage = 'url(./assets/rogue1.png)'
+  }
+  if (chosenClass === 'Mage') {
+  player.style.backgroundImage = 'url(./assets/mage1.png)'
+  }
 })

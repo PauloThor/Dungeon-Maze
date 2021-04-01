@@ -1,42 +1,69 @@
-body {
+/* html {
     display: flex;
     justify-content: center;
+    background-color: #181A1B;
+} */
+
+body {
+    display: flex;
+    /* justify-content: center; */
+    background-color: #181A1B;
+    background-image: url(https://cdn.wallpapersafari.com/55/70/GhtAC5.jpg);
+    height: 640px;
 }
+
 
 main {
     position: relative;
 }
 
+.activated {
+    background-image: url(https://i.pinimg.com/564x/a9/85/ce/a985ce94e99e51f1e0973a916bc27d8d.jpg);
+}
+
 .square {
     width: 40px;
     height: 40px;
+    /* background-color: #4D4D4D; */
+}
+
+.wall {
+background-image: url(./assets/block.png);
 }
 
 #player {
     width: 40px;
     height: 40px;
-    background-color: grey;
-    /* animation: slideRight 0.1s */
+    background-image: url(./assets/warrior1.png);
+    background-size: contain;
 }
 
 #win {
-    position: absolute;
-    z-index: 1;
-    top: 40%;
-    background-color: green;
-    width: 100%;
-    text-align: center;
-    opacity: 0.8;
-    color: white;
-    cursor: pointer;
+    top: 35%;
 }
 
-.hidden {
-    display: none;
+#win h1 {
+    font-size: 80px;
+    font-family: monospace, sans-serif;
 }
 
 .slideRight {
     animation: slideRight 0.1s;
+}
+
+.slideLeft {
+    animation: slideLeft 0.1s;
+    transform: scaleX(-1);
+}
+
+.slideBottom {
+    animation: slideBottom 0.1s;
+    transform: rotate(90deg);
+}
+
+.slideTop {
+    animation: slideTop 0.1s;
+    transform: rotate(-90deg);
 }
 
 @keyframes slideRight {
@@ -44,29 +71,56 @@ main {
     to {margin-left: 0;}
     }
 
-.slideLeft {
-    animation: slideLeft 0.1s;
-}
-
 @keyframes slideLeft {
     from {margin-left: -20px;}
     to {margin-left: 0;}
     }
-
-.slideBottom {
-    animation: slideBottom 0.1s;
-}
 
 @keyframes slideBottom {
     from {margin-top: 20px;}
     to {margin-top: 0%;}
     }
 
-.slideTop {
-    animation: slideTop 0.1s;
-}
-
 @keyframes slideTop {
     from {margin-top: -20px;}
     to {margin-top: 0%;}
     }
+
+input.input {
+    background-color: #181A1B;
+    color: orange;
+}
+
+input.input::placeholder {
+    color: grey;
+}
+
+div#login h1, div#login label {
+    color: orange;
+}
+
+div.select select {
+    background-color: #181A1B;
+    color: grey;
+}
+
+button#startGame {
+    background-color: #181A1B;
+    color: grey;
+}
+
+div#userInfo {
+    width: 175px;
+    padding: 5px;
+    background-color: #181A1B;
+    margin: 10px;
+    height: 163px;
+    border: 2px solid grey;
+    text-align: center;
+}
+
+div#userInfo h2 {
+    font-size: 30px;
+    color: orange;
+    font-family: monospace, sans-serif;
+}
