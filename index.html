@@ -10,20 +10,26 @@
 </head>
 <body>
     <div id="userInfo">
-        <h2 id="nickname"></h2>
-        <h2 id="class"></h2>
-        <h2 id="level"></h2>
+        <div class="template">
+            <h2 id="nickname"></h2>
+        </div>
+        <div class="template">
+            <h2 id="class"></h2>
+        </div>
+        <div class="template">
+            <h2 id="level"></h2>
+        </div>
     </div>
     <main id="main">
         <div class="modal is-active" id="login">
-            <div class="modal-background">
+            <div class="modal-background" id="modalBackgroundLogin">
                 <div class="modal-content px-5 py-5 has-background-grey-dark">
                     <h1 class="title has-text-centered is-size-1 is-uppercase">Login</h1>
                     <form>
                         <div class="field">
                             <label>Nickname</label>
                             <div class="control">
-                                <input id="username" type="text" class="input" placeholder="Type your Username" required maxlength="9">
+                                <input id="username" type="text" class="input" placeholder="Type your Username" required maxlength="9" autocomplete="off">
                             </div>
                         </div>
                         <div class="field">
@@ -67,7 +73,8 @@
         </audio>  
         <audio id="soundDefault">   
             <source src="./assets/deep-urban.mp3" />   
-        </audio>                            
+        </audio>
+        <img src="./assets/dragon.gif" alt="" id="boss">                            
     </main>
     <script src="./script.js"></script>
 </body>

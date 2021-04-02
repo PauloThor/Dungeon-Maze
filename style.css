@@ -8,7 +8,7 @@ body {
     display: flex;
     /* justify-content: center; */
     background-color: #181A1B;
-    background-image: url(https://cdn.wallpapersafari.com/55/70/GhtAC5.jpg);
+    background-image: url(./assets/background-default.webp);
     height: 630px;
 }
 
@@ -17,18 +17,38 @@ main {
     position: relative;
 }
 
+main div#modalBackgroundLogin {
+    display: flex;
+    align-items: center;
+}
+
+main div.modal-content {
+    background-image: url(./assets/background-lava.jpg);
+    border-radius: 10px;
+}
+
+main .input, button.button {
+    border-color: grey;
+}
+
+main .input:focus {
+    border-color: orange;
+}
+
 .activated {
-    background-image: url(https://i.pinimg.com/564x/a9/85/ce/a985ce94e99e51f1e0973a916bc27d8d.jpg);
+    background-image: url(./assets/background-lava.jpg);
+    background-size: cover;
+    background-position: center;
 }
 
 .square {
     width: 40px;
     height: 40px;
-    /* background-color: #4D4D4D; */
 }
 
 .wall {
-background-image: url(./assets/block.png);
+    background-image: url(./assets/block.png);
+    background-size: contain;
 }
 
 #player {
@@ -36,6 +56,42 @@ background-image: url(./assets/block.png);
     height: 40px;
     background-image: url(./assets/warrior1.png);
     background-size: contain;
+}
+
+.item {
+    background-image: url(./assets/scroll.png);
+    animation:spin 2s linear infinite;
+    /* background-size: cover; */
+}
+
+.potion {
+    background-image: url(./assets/potion.png);
+    /* background-size: cover; */
+    animation:spin 2s linear infinite;
+}
+
+.monster {
+    background-image: url(./assets/skelleton.gif);
+    background-size: 170%;
+    background-position: center;
+    transition: all 2s;
+}
+
+.boss {
+    background-image: url(./assets/dragon.gif);
+    background-size: 200%;
+    /* background-position: center; */
+}
+
+img#boss {
+    width: 100px;
+    height: 90px;
+    max-width: initial;
+}
+
+@keyframes spin{
+	from{transform:rotate(0deg)}
+	to{transform:rotate(360deg)}	
 }
 
 #win {
@@ -114,13 +170,18 @@ div#userInfo {
     padding: 5px;
     background-color: #181A1B;
     margin: 10px;
-    height: 163px;
+    height: 168px;
     border: 2px solid grey;
     text-align: center;
 }
 
 div#userInfo h2 {
     font-size: 30px;
-    color: orange;
+    color: beige;
     font-family: monospace, sans-serif;
+}
+
+div.template {
+    background-image: url(./assets/template-wood.png);
+    margin: 5px 0;
 }

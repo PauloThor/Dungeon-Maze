@@ -1,12 +1,12 @@
 const map = [
     "WWWWWWWWWWWWWWWWWWWWWWWWWWW",
-    "W   W     W     W W W     W",
-    "W W W WWW WWWWW W W W WWWWW",
-    "W W W   W     W W   W     F",
-    "W WWWWWWW W WWW W W W WWW W",
+    "W   W     W     W W W   B W",
+    "W W W WWW WWWWW W W WMWW  W",
+    "W WPW MIW     W W   W  WWWW",
+    "W WWWWWWW W WWW W W W   W W",
     "W         W     W W W W W F",
     "W WWW WWWWW WWWWW W W W W W",
-    "W W   W   W W     W W W W W",
+    "W W   W   W W M   W W W W W",
     "W WWWWW W W W W W W   W W W",
     "S     W W W W W W WWW W   W",
     "WWWWW W W W W W W W W W W W",
@@ -30,7 +30,6 @@ for (let i = 0; i < map.length; i++) {
         divLine.appendChild(div);
         div.id = `div${i}-${j}`
         if (map[i][j] === 'W') {
-            // div.style.background = '#145399'
             div.classList.add('wall')
         }
         if (map[i][j] === 'S') {
@@ -39,6 +38,19 @@ for (let i = 0; i < map.length; i++) {
             div.appendChild(player)
             playerLine = i;
             playerColumn = j;
+        }
+        if (map[i][j] === 'I') {
+          div.classList.add('item')
+      }
+        if (map[i][j] === 'M') {
+          div.classList.add('monster')
+      }
+        if (map[i][j] === 'P') {
+          div.classList.add('potion')
+      }
+        if (map[i][j] === 'B') {
+          div.appendChild(document.getElementById('boss'))
+          // div.classList.add('boss')
         }
     }
 }
@@ -82,7 +94,7 @@ function checkWin() {
   if (map[playerLine][playerColumn] === 'F') {
     modal.classList.add('is-active')
     const winSound = document.getElementById("soundWin"); 
-    winSound.volume = 0.2;
+    winSound.volume = 0.3;
     winSound.play();
   }
 }
@@ -95,23 +107,21 @@ modalBg.addEventListener('click', () => {
   playerColumn = 0;
 })
 
+function checkItem() {
+  if (map[playerLine][playerColumn] === 'I') {
+    document.getElementById(`div${playerLine}-${playerColumn}`).classList.remove('item')
+  }
+  if (map[playerLine][playerColumn] === 'B') {
+    document.getElementById('boss').style.display = 'none'
+  } 
+}
+
 document.addEventListener('keydown', (event) => {
   if (map[playerLine][playerColumn] !== 'F') movePlayer[event.key]()
   appendPlayer()
   checkWin()
+  checkItem()
 });
-
-
-
-
-// LEVEL BY STEPS SHOW ON THE RIGHT (guardado numa variável global)
-// MONSTERS BY LEVEL
-// GAME OVER
-// MEDIEVAL BLOCKS
-// SECRET PASSAGES (DOORS, ITEMS)
-// HERO HP AND POTIONS AROUND THE MAP
-// TRAPS AROUND THE MAP
-
 
 
 function start() {
@@ -149,11 +159,15 @@ startGame.addEventListener('click', () => {
   player.style.backgroundImage = 'url(./assets/mage1.png)'
   }
   const soundDefault = document.getElementById('soundDefault')
-  soundDefault.volume = 0.4;
+  soundDefault.volume = 0.3;
   soundDefault.loop = true;
   soundDefault.play();
 })
 
-// const mySound = document.getElementById("soundStep");   
-// const correctButton = document.getElementById("correct");   
-// correctButton.addEventListener("click", function(){ mySound.play(); });  
+// LEVEL BY STEPS SHOW ON THE RIGHT (guardado numa variável global)
+// MONSTERS BY LEVEL
+// GAME OVER
+// MEDIEVAL BLOCKS
+// SECRET PASSAGES (DOORS, ITEMS)
+// HERO HP AND POTIONS AROUND THE MAP
+// TRAPS AROUND THE MAP
