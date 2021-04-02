@@ -72,7 +72,7 @@ const movePlayer = {
 
 function appendPlayer() {
   const currentDiv = document.getElementById(`div${playerLine}-${playerColumn}`)
-  currentDiv.appendChild(document.getElementById('player'))
+  currentDiv.appendChild(document.getElementById('player'))  
 }
 
 const modalBg = document.querySelector('#modalBgWin')
@@ -81,6 +81,9 @@ const modal = document.querySelector('#modalWin')
 function checkWin() {
   if (map[playerLine][playerColumn] === 'F') {
     modal.classList.add('is-active')
+    const winSound = document.getElementById("soundWin"); 
+    winSound.volume = 0.2;
+    winSound.play();
   }
 }
 
@@ -106,10 +109,6 @@ document.addEventListener('keydown', (event) => {
 // GAME OVER
 // MEDIEVAL BLOCKS
 // SECRET PASSAGES (DOORS, ITEMS)
-// LOGIN WITH NICKNAME
-// PLAYER NICKNAME ON THE RIGHT
-// CONSTANT ANIMATIONS
-// HERO CLASS OF CHOICE (guardar numa variável global a classe escolhida)
 // HERO HP AND POTIONS AROUND THE MAP
 // TRAPS AROUND THE MAP
 
@@ -132,7 +131,7 @@ function showPlayerInfo() {
   const playerLevel = document.getElementById('level')
   playerName.innerText = username
   playerClass.innerText = chosenClass
-  playerLevel.innerText = 'Level: 1' 
+  playerLevel.innerText = 'Level 1' 
 }
 
 const startGame = document.getElementById('startGame')
@@ -149,4 +148,12 @@ startGame.addEventListener('click', () => {
   if (chosenClass === 'Mage') {
   player.style.backgroundImage = 'url(./assets/mage1.png)'
   }
+  const soundDefault = document.getElementById('soundDefault')
+  soundDefault.volume = 0.4;
+  soundDefault.loop = true;
+  soundDefault.play();
 })
+
+// const mySound = document.getElementById("soundStep");   
+// const correctButton = document.getElementById("correct");   
+// correctButton.addEventListener("click", function(){ mySound.play(); });  
