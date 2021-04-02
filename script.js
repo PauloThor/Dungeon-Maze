@@ -1,18 +1,18 @@
 let map = [
     "WWWWWWWWWWWWWWWWWWWWWWWWWWW",
-    "W   W     W     W W W   B W",
+    "W   W     WI    W W W   B W",
     "W W W WWW WWWWW W W WMWW  W",
-    "W WPW MIW     W W   W  WWWW",
-    "W WWWWWWW W WWW W W W   W W",
+    "W WPW MIW    PW W   W  WWWW",
+    "W WWWWWWW W WWW W W W  IW W",
     "W         W     W W W W W F",
-    "W WWW WWWWW WWWWW W W W W W",
+    "WMWWW WWWWW WWWWW W W W W W",
     "W W   W   W W M   W W W W W",
     "W WWWWW W W W W W W   W W W",
-    "S     W W W W W W WWW W   W",
+    "S     W W W W W W WWW W  PW",
     "WWWWW W W W W W W W W W W W",
-    "W     W W W   W W W W W   W",
+    "W   M W W W   W W W W W M W",
     "W WWWWWWW WWWWW W W W W W F",
-    "W       W       W   W     W",
+    "W      MW   M   W   W    MW",
     "WWWWWWWWWWWWWWWWWWWWWWWWWWW",
 ];
 
@@ -120,6 +120,35 @@ function checkDeath() {
   updateStatus()
 }
 
+function showPlayerInfo() {
+  const playerName = document.getElementById('nickname')
+  const playerClass = document.getElementById('class')
+  const playerLevel = document.getElementById('level')
+  playerName.innerText = username
+  playerClass.innerText = chosenClass
+  playerLevel.innerText = 'Level ' + level 
+}
+
+const startGame = document.getElementById('startGame')
+startGame.addEventListener('click', () => {
+  chosenClass = document.querySelector('option:checked').value
+  username = document.querySelector('#username').value
+  document.getElementById('login').classList.remove('is-active')
+  showPlayerInfo()
+
+  const player = document.getElementById('player')
+  if (chosenClass === 'Rogue') {
+  player.style.backgroundImage = 'url(./assets/rogue1.png)'
+  }
+  if (chosenClass === 'Mage') {
+  player.style.backgroundImage = 'url(./assets/mage1.png)'
+  }
+  const soundDefault = document.getElementById('soundDefault')
+  soundDefault.volume = 0.3;
+  soundDefault.loop = true;
+  soundDefault.play();
+})
+
 modalBg.addEventListener('click', () => {
   modal.classList.remove('is-active')
   document.querySelector('#modalLose').classList.remove('is-active')
@@ -172,12 +201,46 @@ function checkItem() {
   updateStatus()
 }
 
+let evolveStage = 1;
+
+function checkEvolve() {
+  if (level >= 10 && level < 50 && evolveStage === 1) {
+    if (chosenClass === 'Warrior') {
+      player.style.backgroundImage = 'url(./assets/warrior2.png)'
+    }
+    if (chosenClass === 'Rogue') {
+      player.style.backgroundImage = 'url(./assets/rogue2.png)'
+    }
+    if (chosenClass === 'Mage') {
+      player.style.backgroundImage = 'url(./assets/mage2.png)'
+    }
+    health = 100
+    evolveStage = 2;
+    updateStatus()
+  }
+  if (level > 50 && evolveStage === 2) {
+    if (chosenClass === 'Warrior') {
+      player.style.backgroundImage = 'url(./assets/warrior3.png)'
+    }
+    if (chosenClass === 'Rogue') {
+      player.style.backgroundImage = 'url(./assets/rogue3.png)'
+    }
+    if (chosenClass === 'Mage') {
+      player.style.backgroundImage = 'url(./assets/mage3.png)'
+    }
+    health = 100
+    evolveStage = 3
+    updateStatus()
+  }
+}
+
 document.addEventListener('keydown', (event) => {
   if (map[playerLine][playerColumn] !== 'F') movePlayer[event.key]()
   appendPlayer()
   checkWin()
   checkItem()
   checkDeath()
+  checkEvolve()
 });
 
 
@@ -189,39 +252,8 @@ function start() {
 
 window.addEventListener('load',start)
 
-function showPlayerInfo() {
-  const playerName = document.getElementById('nickname')
-  const playerClass = document.getElementById('class')
-  const playerLevel = document.getElementById('level')
-  playerName.innerText = username
-  playerClass.innerText = chosenClass
-  playerLevel.innerText = 'Level ' + level 
-}
-
-const startGame = document.getElementById('startGame')
-startGame.addEventListener('click', () => {
-  chosenClass = document.querySelector('option:checked').value
-  username = document.querySelector('#username').value
-  document.getElementById('login').classList.remove('is-active')
-  showPlayerInfo()
-
-  const player = document.getElementById('player')
-  if (chosenClass === 'Rogue') {
-  player.style.backgroundImage = 'url(./assets/rogue1.png)'
-  }
-  if (chosenClass === 'Mage') {
-  player.style.backgroundImage = 'url(./assets/mage1.png)'
-  }
-  const soundDefault = document.getElementById('soundDefault')
-  soundDefault.volume = 0.3;
-  soundDefault.loop = true;
-  soundDefault.play();
-})
 
 // LEVEL BY STEPS SHOW ON THE RIGHT (guardado numa variável global)
 // MONSTERS BY LEVEL
-// GAME OVER
-// MEDIEVAL BLOCKS
 // SECRET PASSAGES (DOORS, ITEMS)
-// HERO HP AND POTIONS AROUND THE MAP
 // TRAPS AROUND THE MAP
