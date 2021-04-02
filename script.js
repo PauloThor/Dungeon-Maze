@@ -1,4 +1,4 @@
-const map = [
+let map = [
     "WWWWWWWWWWWWWWWWWWWWWWWWWWW",
     "W   W     W     W W W   B W",
     "W W W WWW WWWWW W W WMWW  W",
@@ -88,7 +88,16 @@ function appendPlayer() {
 }
 
 const modalBg = document.querySelector('#modalBgWin')
+const modalBgLose = document.getElementById('modalBgLose')
 const modal = document.querySelector('#modalWin')
+
+function updateStatus() {
+  const playerHealth = document.getElementById('healthbar')
+  const playerLevelUp = document.getElementById('level') 
+  
+  playerHealth.style.width = health + '%'
+  playerLevelUp.innerText = 'Level ' + level
+}
 
 function checkWin() {
   if (map[playerLine][playerColumn] === 'F') {
@@ -96,24 +105,71 @@ function checkWin() {
     const winSound = document.getElementById("soundWin"); 
     winSound.volume = 0.3;
     winSound.play();
+    health = 100
+    level = 1
+    updateStatus()
   }
+}
+
+function checkDeath() {
+  if (health <= 0) {
+    document.querySelector('#modalLose').classList.add('is-active')
+    health = 100
+    level = 1
+  } 
+  updateStatus()
 }
 
 modalBg.addEventListener('click', () => {
   modal.classList.remove('is-active')
+  document.querySelector('#modalLose').classList.remove('is-active')
   const startingPosition = document.getElementById('div9-0');
   startingPosition.appendChild(player)
   playerLine = 9;
   playerColumn = 0;
 })
 
+modalBgLose.addEventListener('click', () => {
+  modal.classList.remove('is-active')
+  document.querySelector('#modalLose').classList.remove('is-active')
+  const startingPosition = document.getElementById('div9-0');
+  startingPosition.appendChild(player)
+  playerLine = 9;
+  playerColumn = 0;
+})
+
+let chosenClass = 'Warrior'
+let username = 'Player'
+let health = 100
+let level = 1
+
 function checkItem() {
   if (map[playerLine][playerColumn] === 'I') {
     document.getElementById(`div${playerLine}-${playerColumn}`).classList.remove('item')
+    level += 10
+    map[playerLine] = map[playerLine].replace(/I/,'X')
+  }
+  if (map[playerLine][playerColumn] === 'P') {
+    document.getElementById(`div${playerLine}-${playerColumn}`).classList.remove('potion')
+    health += 10
+    map[playerLine] = map[playerLine].replace(/P/,'X')
+  }
+  if (map[playerLine][playerColumn] === 'M') {
+    document.getElementById(`div${playerLine}-${playerColumn}`).classList.remove('monster')
+    health -= 30
+    level += 7
+    map[playerLine] = map[playerLine].replace(/M/,'X')
   }
   if (map[playerLine][playerColumn] === 'B') {
     document.getElementById('boss').style.display = 'none'
-  } 
+    health -= 80;
+    level += 50;
+    map[playerLine] = map[playerLine].replace(/B/,'X')
+  }
+  if (health < 0) {health = 0}
+  if (health > 100) {health = 100} 
+
+  updateStatus()
 }
 
 document.addEventListener('keydown', (event) => {
@@ -121,6 +177,7 @@ document.addEventListener('keydown', (event) => {
   appendPlayer()
   checkWin()
   checkItem()
+  checkDeath()
 });
 
 
@@ -132,16 +189,13 @@ function start() {
 
 window.addEventListener('load',start)
 
-let chosenClass = 'Warrior'
-let username = 'Player'
-
 function showPlayerInfo() {
   const playerName = document.getElementById('nickname')
   const playerClass = document.getElementById('class')
   const playerLevel = document.getElementById('level')
   playerName.innerText = username
   playerClass.innerText = chosenClass
-  playerLevel.innerText = 'Level 1' 
+  playerLevel.innerText = 'Level ' + level 
 }
 
 const startGame = document.getElementById('startGame')

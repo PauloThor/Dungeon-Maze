@@ -19,6 +19,9 @@
         <div class="template">
             <h2 id="level"></h2>
         </div>
+        <div class="template health">
+            <div id="healthbar"></div>
+        </div>
     </div>
     <main id="main">
         <div class="modal is-active" id="login">
@@ -62,9 +65,16 @@
             </div>
         </div>
         <div class="modal" id="modalWin">
-            <div class="modal-background" id="modalBgWin">
+            <div class="modal-background modalBg" id="modalBgWin">
                 <div class="modal-content px-5 py-5" id="win">
                     <h1 class="title has-text-success has-text-centered is-uppercase">Victory!</h1>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="modalLose">
+            <div class="modal-background modalBg" id="modalBgLose">
+                <div class="modal-content px-5 py-5" id="lose">
+                    <h1 class="title has-text-danger-dark has-text-centered is-uppercase">GAME OVER</h1>
                 </div>
             </div>
         </div>

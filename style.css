@@ -103,6 +103,15 @@ img#boss {
     font-family: monospace, sans-serif;
 }
 
+#lose {
+    top: 35%;
+}
+
+#lose h1 {
+    font-size: 80px;
+    font-family: monospace, sans-serif;
+}
+
 .slideRight {
     animation: slideRight 0.1s;
 }
@@ -166,13 +175,14 @@ button#startGame {
 }
 
 div#userInfo {
-    width: 175px;
+    width: 180px;
     padding: 5px;
     background-color: #181A1B;
-    margin: 10px;
-    height: 168px;
+    margin: 5px;
+    height: 220px;
     border: 2px solid grey;
     text-align: center;
+    border-radius: 5px;
 }
 
 div#userInfo h2 {
@@ -182,6 +192,18 @@ div#userInfo h2 {
 }
 
 div.template {
-    background-image: url(./assets/template-wood.png);
+    background-image: url(./assets/template-medieval.png);
+    background-size: 100% 100%;
     margin: 5px 0;
+}
+
+div#userInfo div.health {
+    width: 165px;
+}
+
+div#userInfo div#healthbar {
+    height: 50px;
+    background-color: rgb(145, 16, 16);
+    width: 100%;
+    z-index: 2;
 }
