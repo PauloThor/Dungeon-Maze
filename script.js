@@ -16,6 +16,25 @@ let map = [
     "WWWWWWWWWWWWWWWWWWWWWWWWWWW",
 ];
 
+let mapReset = [
+  "WWWWWWWWWWWWWWWWWWWWWWWWWWW",
+  "W   W     WI    W W W   B W",
+  "W W W WWW WWWWW W W WMWW  W",
+  "W WPW MIW    PW W   W  WWWW",
+  "W WWWWWWW W WWW W W W  IW W",
+  "W         W     W W W W W F",
+  "WMWWW WWWWW WWWWW W W W W W",
+  "W W   W   W W M   W W W W W",
+  "W WWWWW W W W W W W   W W W",
+  "S     W W W W W W WWW W  PW",
+  "WWWWW W W W W W W W W W W W",
+  "W   M W W W   W W W W W M W",
+  "W WWWWWWW WWWWW W W W W W F",
+  "W      MW   M   W   W    MW",
+  "WWWWWWWWWWWWWWWWWWWWWWWWWWW",
+];
+
+
 const main = document.querySelector('main')
 let playerLine = 0
 let playerColumn = 0
@@ -93,10 +112,28 @@ const modal = document.querySelector('#modalWin')
 
 function updateStatus() {
   const playerHealth = document.getElementById('healthbar')
-  const playerLevelUp = document.getElementById('level') 
-  
+  const playerLevelUp = document.getElementById('level')
+   
   playerHealth.style.width = health + '%'
   playerLevelUp.innerText = 'Level ' + level
+}
+
+function resetGame() {
+  map = [...mapReset];
+  for (let i = 0; i < map.length; i++) {
+    for (let j = 0; j < map[i].length; j++) {
+      const currentPositionDiv = document.getElementById(`div${i}-${j}`)
+      const currentPositionMap = map[i][j]
+      if (currentPositionMap === 'M') {currentPositionDiv.className = 'square monster'}
+      if (currentPositionMap === 'I') {currentPositionDiv.className = 'square item'}
+      if (currentPositionMap === 'P') {currentPositionDiv.className = 'square potion'}
+    }
+  }
+  document.getElementById('boss').style.display = 'initial'
+  health = 100;
+  level = 1;
+  evolveStage = 1;
+  checkEvolve()
 }
 
 function checkWin() {
@@ -105,17 +142,18 @@ function checkWin() {
     const winSound = document.getElementById("soundWin"); 
     winSound.volume = 0.3;
     winSound.play();
-    health = 100
-    level = 1
-    updateStatus()
+    resetGame()
   }
+  updateStatus()
 }
 
 function checkDeath() {
   if (health <= 0) {
     document.querySelector('#modalLose').classList.add('is-active')
-    health = 100
-    level = 1
+    const loseSound = document.getElementById("soundLose"); 
+    loseSound.volume = 0.3;
+    loseSound.play();
+    resetGame()
   } 
   updateStatus()
 }
@@ -144,7 +182,7 @@ startGame.addEventListener('click', () => {
   player.style.backgroundImage = 'url(./assets/mage1.png)'
   }
   const soundDefault = document.getElementById('soundDefault')
-  soundDefault.volume = 0.3;
+  soundDefault.volume = 0.2;
   soundDefault.loop = true;
   soundDefault.play();
 })
@@ -176,24 +214,36 @@ function checkItem() {
   if (map[playerLine][playerColumn] === 'I') {
     document.getElementById(`div${playerLine}-${playerColumn}`).classList.remove('item')
     level += 10
-    map[playerLine] = map[playerLine].replace(/I/,'X')
+    map[playerLine] = map[playerLine].replace(/I/,'i')
+    const itemSound = document.getElementById("soundItem"); 
+    itemSound.volume = 0.3;
+    itemSound.play();
   }
   if (map[playerLine][playerColumn] === 'P') {
     document.getElementById(`div${playerLine}-${playerColumn}`).classList.remove('potion')
     health += 10
-    map[playerLine] = map[playerLine].replace(/P/,'X')
+    map[playerLine] = map[playerLine].replace(/P/,'p')
+    const itemSound = document.getElementById("soundItem"); 
+    itemSound.volume = 0.3;
+    itemSound.play();
   }
   if (map[playerLine][playerColumn] === 'M') {
     document.getElementById(`div${playerLine}-${playerColumn}`).classList.remove('monster')
     health -= 30
     level += 7
-    map[playerLine] = map[playerLine].replace(/M/,'X')
+    map[playerLine] = map[playerLine].replace(/M/,'m')
+    const creatureDeadSound = document.getElementById("soundCreatureDead"); 
+    creatureDeadSound.volume = 0.2;
+    creatureDeadSound.play();
   }
   if (map[playerLine][playerColumn] === 'B') {
     document.getElementById('boss').style.display = 'none'
     health -= 80;
     level += 50;
-    map[playerLine] = map[playerLine].replace(/B/,'X')
+    map[playerLine] = map[playerLine].replace(/B/,'b')
+    const bossSound = document.getElementById("soundBoss"); 
+    bossSound.volume = 0.5;
+    bossSound.play();
   }
   if (health < 0) {health = 0}
   if (health > 100) {health = 100} 
@@ -204,6 +254,20 @@ function checkItem() {
 let evolveStage = 1;
 
 function checkEvolve() {
+  const levelUpSound = document.getElementById("soundLevelUp"); 
+  levelUpSound.volume = 0.3;
+  if (level <= 10) {
+    if (chosenClass === 'Warrior') {
+      player.style.backgroundImage = 'url(./assets/warrior1.png)'
+    }
+    if (chosenClass === 'Rogue') {
+      player.style.backgroundImage = 'url(./assets/rogue1.png)'
+    }
+    if (chosenClass === 'Mage') {
+      player.style.backgroundImage = 'url(./assets/mage1.png)'
+    }
+    evolveStage = 1;
+  }
   if (level >= 10 && level < 50 && evolveStage === 1) {
     if (chosenClass === 'Warrior') {
       player.style.backgroundImage = 'url(./assets/warrior2.png)'
@@ -216,7 +280,7 @@ function checkEvolve() {
     }
     health = 100
     evolveStage = 2;
-    updateStatus()
+    levelUpSound.play();
   }
   if (level > 50 && evolveStage === 2) {
     if (chosenClass === 'Warrior') {
@@ -230,8 +294,9 @@ function checkEvolve() {
     }
     health = 100
     evolveStage = 3
-    updateStatus()
+    levelUpSound.play();
   }
+  updateStatus()
 }
 
 document.addEventListener('keydown', (event) => {
@@ -252,6 +317,8 @@ function start() {
 
 window.addEventListener('load',start)
 
+
+// CREATE ANOTHER VARIABLE TO RESET MAP
 
 // LEVEL BY STEPS SHOW ON THE RIGHT (guardado numa variável global)
 // MONSTERS BY LEVEL
