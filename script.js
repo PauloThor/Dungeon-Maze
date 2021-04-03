@@ -1,38 +1,22 @@
 let map = [
     "WWWWWWWWWWWWWWWWWWWWWWWWWWW",
     "WM  W     WI    W W W   B W",
-    "W WPW WWW WWWWW W W WMWW  W",
-    "W WWW MIW    PW W   W  WWWW",
-    "W WMWWWWW W WWW W W W  IW W",
-    "W         W     W W W W W F",
+    "W WPW WWW WWWWW W W WMWW  F",
+    "W WWW MIW    PW W L W  WWWW",
+    "W WMWWWWWLW WWW W W W  IW W",
+    "W         W     W W W W W W",
     "WMWWW WWWWW WWWWW W W W W W",
-    "W W   W   W W M P W W W W W",
-    "W WWWWW W W W W W W   W W W",
+    "W WP  W   W W M   W W W W W",
+    "W WWWWW W W W W WPW   W W W",
     "S     W W W W W W WWW W  PW",
-    "WWWWW W W W W W W W W WMW W",
-    "W   M W W W   W W W W W   W",
-    "W WWWWWWW WWWWW W W W W W F",
+    "WWWWW W W W W W W WPW WMW W",
+    "W   M W W W L W W W W W   W",
+    "W WWWWWWW WWWWW W W W W W W",
     "W  M   PW       W   W    IW",
     "WWWWWWWWWWWWWWWWWWWWWWWWWWW",
 ];
 
-let mapReset = [
-  "WWWWWWWWWWWWWWWWWWWWWWWWWWW",
-  "W   W     WI    W W W   B W",
-  "W W W WWW WWWWW W W WMWW  W",
-  "W WPW MIW    PW W   W  WWWW",
-  "W WWWWWWW W WWW W W W  IW W",
-  "W         W     W W W W W F",
-  "WMWWW WWWWW WWWWW W W W W W",
-  "W W   W   W W M   W W W W W",
-  "W WWWWW W W W W W W   W W W",
-  "S     W W W W W W WWW W  PW",
-  "WWWWW W W W W W W W W W W W",
-  "W   M W W W   W W W W W M W",
-  "W WWWWWWW WWWWW W W W W W F",
-  "W      MW   M   W   W    MW",
-  "WWWWWWWWWWWWWWWWWWWWWWWWWWW",
-];
+let mapReset = [...map];
 
 
 const main = document.querySelector('main')
@@ -64,6 +48,9 @@ for (let i = 0; i < map.length; i++) {
         if (map[i][j] === 'M') {
           div.classList.add('monster')
       }
+      if (map[i][j] === 'L') {
+        div.classList.add('lord')
+    }
         if (map[i][j] === 'P') {
           div.classList.add('potion')
       }
@@ -127,6 +114,7 @@ function resetGame() {
       if (currentPositionMap === 'M') {currentPositionDiv.className = 'square monster'}
       if (currentPositionMap === 'I') {currentPositionDiv.className = 'square item'}
       if (currentPositionMap === 'P') {currentPositionDiv.className = 'square potion'}
+      if (currentPositionMap === 'L') {currentPositionDiv.className = 'square lord'}
     }
   }
   document.getElementById('boss').style.display = 'initial'
@@ -229,9 +217,18 @@ function checkItem() {
   }
   if (map[playerLine][playerColumn] === 'M') {
     document.getElementById(`div${playerLine}-${playerColumn}`).classList.remove('monster')
-    health -= 30
+    health -= 15
     level += 7
     map[playerLine] = map[playerLine].replace(/M/,'m')
+    const creatureDeadSound = document.getElementById("soundCreatureDead"); 
+    creatureDeadSound.volume = 0.2;
+    creatureDeadSound.play();
+  }
+  if (map[playerLine][playerColumn] === 'L') {
+    document.getElementById(`div${playerLine}-${playerColumn}`).classList.remove('lord')
+    health -= 50
+    level += 13
+    map[playerLine] = map[playerLine].replace(/L/,'l')
     const creatureDeadSound = document.getElementById("soundCreatureDead"); 
     creatureDeadSound.volume = 0.2;
     creatureDeadSound.play();
@@ -268,7 +265,7 @@ function checkEvolve() {
     }
     evolveStage = 1;
   }
-  if (level >= 40 && level < 70 && evolveStage === 1) {
+  if (level >= 40 && level < 100 && evolveStage === 1) {
     if (chosenClass === 'Warrior') {
       player.style.backgroundImage = 'url(./assets/warrior2.png)'
     }
@@ -282,7 +279,7 @@ function checkEvolve() {
     evolveStage = 2;
     levelUpSound.play();
   }
-  if (level >= 70 && evolveStage === 2) {
+  if (level >= 100 && evolveStage === 2) {
     if (chosenClass === 'Warrior') {
       player.style.backgroundImage = 'url(./assets/warrior3.png)'
     }

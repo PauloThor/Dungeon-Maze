@@ -6,10 +6,14 @@ body {
     height: 630px;
 }
 
-label, input, form, option, h2 {
+label, input, form, option, h2, select {
     font-family: 'Syne Mono', monospace;
     color: orange;
     font-size: 1.3rem;
+}
+
+div.select select {
+    font-size: 1.1rem;
 }
 
 
@@ -76,6 +80,13 @@ main .input:focus {
     background-size: 170%;
     background-position: center;
     transition: all 2s;
+}
+
+.lord {
+    background-image: url(./assets/lord.gif);
+    background-size: 160%;
+    background-position: center;
+    transform: scaleX(-1);
 }
 
 img#boss {
