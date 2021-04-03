@@ -1,18 +1,18 @@
 let map = [
     "WWWWWWWWWWWWWWWWWWWWWWWWWWW",
-    "W   W     WI    W W W   B W",
-    "W W W WWW WWWWW W W WMWW  W",
-    "W WPW MIW    PW W   W  WWWW",
-    "W WWWWWWW W WWW W W W  IW W",
+    "WM  W     WI    W W W   B W",
+    "W WPW WWW WWWWW W W WMWW  W",
+    "W WWW MIW    PW W   W  WWWW",
+    "W WMWWWWW W WWW W W W  IW W",
     "W         W     W W W W W F",
     "WMWWW WWWWW WWWWW W W W W W",
-    "W W   W   W W M   W W W W W",
+    "W W   W   W W M P W W W W W",
     "W WWWWW W W W W W W   W W W",
     "S     W W W W W W WWW W  PW",
-    "WWWWW W W W W W W W W W W W",
-    "W   M W W W   W W W W W M W",
+    "WWWWW W W W W W W W W WMW W",
+    "W   M W W W   W W W W W   W",
     "W WWWWWWW WWWWW W W W W W F",
-    "W      MW   M   W   W    MW",
+    "W  M   PW       W   W    IW",
     "WWWWWWWWWWWWWWWWWWWWWWWWWWW",
 ];
 
@@ -221,7 +221,7 @@ function checkItem() {
   }
   if (map[playerLine][playerColumn] === 'P') {
     document.getElementById(`div${playerLine}-${playerColumn}`).classList.remove('potion')
-    health += 10
+    health += 15
     map[playerLine] = map[playerLine].replace(/P/,'p')
     const itemSound = document.getElementById("soundItem"); 
     itemSound.volume = 0.3;
@@ -256,7 +256,7 @@ let evolveStage = 1;
 function checkEvolve() {
   const levelUpSound = document.getElementById("soundLevelUp"); 
   levelUpSound.volume = 0.3;
-  if (level <= 10) {
+  if (level < 40) {
     if (chosenClass === 'Warrior') {
       player.style.backgroundImage = 'url(./assets/warrior1.png)'
     }
@@ -268,7 +268,7 @@ function checkEvolve() {
     }
     evolveStage = 1;
   }
-  if (level >= 10 && level < 50 && evolveStage === 1) {
+  if (level >= 40 && level < 70 && evolveStage === 1) {
     if (chosenClass === 'Warrior') {
       player.style.backgroundImage = 'url(./assets/warrior2.png)'
     }
@@ -282,7 +282,7 @@ function checkEvolve() {
     evolveStage = 2;
     levelUpSound.play();
   }
-  if (level > 50 && evolveStage === 2) {
+  if (level >= 70 && evolveStage === 2) {
     if (chosenClass === 'Warrior') {
       player.style.backgroundImage = 'url(./assets/warrior3.png)'
     }
