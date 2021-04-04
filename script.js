@@ -121,6 +121,10 @@ function resetGame() {
   health = 100;
   level = 1;
   evolveStage = 1;
+  const startingPosition = document.getElementById('div9-0');
+  startingPosition.appendChild(player)
+  playerLine = 9;
+  playerColumn = 0;
   checkEvolve()
 }
 
@@ -177,20 +181,22 @@ startGame.addEventListener('click', () => {
 
 modalBg.addEventListener('click', () => {
   modal.classList.remove('is-active')
-  document.querySelector('#modalLose').classList.remove('is-active')
-  const startingPosition = document.getElementById('div9-0');
-  startingPosition.appendChild(player)
-  playerLine = 9;
-  playerColumn = 0;
+  document.querySelector('#modalWin').classList.remove('is-active')
+  // const startingPosition = document.getElementById('div9-0');
+  // startingPosition.appendChild(player)
+  // playerLine = 9;
+  // playerColumn = 0;
+  resetGame()
 })
 
 modalBgLose.addEventListener('click', () => {
   modal.classList.remove('is-active')
   document.querySelector('#modalLose').classList.remove('is-active')
-  const startingPosition = document.getElementById('div9-0');
-  startingPosition.appendChild(player)
-  playerLine = 9;
-  playerColumn = 0;
+  // const startingPosition = document.getElementById('div9-0');
+  // startingPosition.appendChild(player)
+  // playerLine = 9;
+  // playerColumn = 0;
+  resetGame()
 })
 
 let chosenClass = 'Warrior'
@@ -328,6 +334,14 @@ document.getElementById('logout').addEventListener('click', () => {
   // document.getElementById('soundDefault').pause()
 })
 
+document.getElementById('help').addEventListener('click', () => {
+  document.getElementById('modalHelp').classList.add('is-active')
+})
+
+document.getElementById('modalBgHelp').addEventListener('click', () => {
+  document.getElementById('modalHelp').classList.remove('is-active')
+
+})
 
 // CREATE ANOTHER VARIABLE TO RESET MAP
 

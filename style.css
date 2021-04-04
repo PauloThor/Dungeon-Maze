@@ -200,7 +200,7 @@ button#startGame {
     color: grey;
 }
 
-div#userInfo {
+div.userInfo {
     width: 180px;
     padding: 5px;
     background-color: #181A1B;
@@ -211,7 +211,7 @@ div#userInfo {
     border-radius: 5px;
 }
 
-div#userInfo h2 {
+div.userInfo h2 {
     font-size: 30px;
     color: orange;
 }
@@ -220,13 +220,14 @@ div.template {
     background-image: url(./assets/template-medieval.png);
     background-size: 100% 100%;
     margin: 5px 0;
+    width: 100%;
 }
 
-div#userInfo div.health {
+div.userInfo div.health {
     width: 165px;
 }
 
-div#userInfo div#healthbar {
+div.userInfo div#healthbar {
     height: 50px;
     background-color: rgb(145, 16, 16);
     width: 100%;
@@ -235,10 +236,11 @@ div#userInfo div#healthbar {
 
 div.logout {
     position: absolute;
-    bottom: 10px;
+    bottom: 30px;
     width: 175px;
-    height: 60px;
+    height: 120px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     cursor: pointer;
@@ -247,4 +249,25 @@ div.logout {
 h2#logout {
     font-size: 30px;
     
+}
+
+div#modalBgHelp {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+div#modalBgHelp h1, div#modalBgHelp p {
+    color: orange;
+    text-align: center;
+    font-family: 'Syne Mono', monospace;
+    font-size: 18px;
+}
+
+div#modalBgHelp h1 {
+    font-size: 40px;
+}
+
+div#modalBgHelp p {
+    background-color: #181A1B;
 }

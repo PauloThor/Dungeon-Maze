@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="userInfo">
+    <div class="userInfo">
         <div class="template">
             <h2 id="nickname"></h2>
         </div>
@@ -23,7 +23,12 @@
         <div class="template health">
             <div id="healthbar"></div>
         </div>
-        <div class="template logout">
+    </div>
+    <div class="userInfo logout">
+        <div class="template">
+            <h2 id="help">Help</h2>
+        </div>
+        <div class="template">
             <h2 id="logout">Logout</h2>
         </div>
     </div>
@@ -79,6 +84,14 @@
             <div class="modal-background modalBg" id="modalBgLose">
                 <div class="modal-content px-5 py-5" id="lose">
                     <!-- <h1 class="title has-text-danger-dark has-text-centered is-uppercase">GAME OVER</h1> -->
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="modalHelp">
+            <div class="modal-background modalHelp" id="modalBgHelp">
+                <div class="modal-content px-5 py-5" id="modalContentHelp">
+                    <h1>HELP</h1>
+                    <p>Pay attention to the damage you take when you fight an enemy. When you evolve you restore your health completely. Take advantage of that. Be careful wether or not you should face the dragon. Make sure you have plenty of health in order to defeat him. Avoid unnecessary battles unless you need to level to evolve and furthermore restore your health. Scrolls give 10 levels. Potions restore 15 health poins.</p>
                 </div>
             </div>
         </div>
