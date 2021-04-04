@@ -68,7 +68,19 @@ const movePlayer = {
       player.classList = 'slideBottom'
     }
   },
+  's' : () => {
+    if (map[playerLine+1][playerColumn] !== 'W'){
+      playerLine += 1
+      player.classList = 'slideBottom'
+    }
+  },
   'ArrowUp' : () => {
+    if (map[playerLine-1][playerColumn] !== 'W'){
+      playerLine -= 1
+      player.classList = 'slideTop'
+    }
+  },
+  'w' : () => {
     if (map[playerLine-1][playerColumn] !== 'W'){
       playerLine -= 1
       player.classList = 'slideTop'
@@ -80,7 +92,19 @@ const movePlayer = {
     playerColumn -= 1
     player.classList = 'slideLeft'
   },
+  'a' : () => {
+    const nextPosition = map[playerLine][playerColumn-1];
+    if (nextPosition === undefined || nextPosition === 'W') {return}
+    playerColumn -= 1
+    player.classList = 'slideLeft'
+  },
   'ArrowRight' : () => {
+    const nextPosition = map[playerLine][playerColumn+1];
+    if (nextPosition === undefined || nextPosition === 'W') {return}
+    playerColumn += 1
+    player.classList = "slideRight"
+  },
+  'd' : () => {
     const nextPosition = map[playerLine][playerColumn+1];
     if (nextPosition === undefined || nextPosition === 'W') {return}
     playerColumn += 1
@@ -142,6 +166,7 @@ loseSound.volume = 0.2;
 soundDefault.volume = 0.2;
 itemSound.volume = 0.2;
 creatureDeadSound.volume = 0.2;
+creatureDeadSound.duration = 0.1
 bossSound.volume = 0.5;
 levelUpSound.volume = 0.2;
 
