@@ -128,11 +128,29 @@ function resetGame() {
   checkEvolve()
 }
 
+// SOUND VARIABLES
+const winSound = document.getElementById("soundWin"); 
+const loseSound = document.getElementById("soundLose"); 
+const soundDefault = document.getElementById('soundDefault')
+const itemSound = document.getElementById("soundItem"); 
+const creatureDeadSound = document.getElementById("soundCreatureDead"); 
+const bossSound = document.getElementById("soundBoss"); 
+const levelUpSound = document.getElementById("soundLevelUp"); 
+
+winSound.volume = 0.2;
+loseSound.volume = 0.2;
+soundDefault.volume = 0.2;
+itemSound.volume = 0.2;
+creatureDeadSound.volume = 0.2;
+bossSound.volume = 0.5;
+levelUpSound.volume = 0.2;
+
+// SOUND VARIABLES
+
+
 function checkWin() {
   if (map[playerLine][playerColumn] === 'F') {
     modal.classList.add('is-active')
-    const winSound = document.getElementById("soundWin"); 
-    winSound.volume = 0.3;
     winSound.play();
     resetGame()
   }
@@ -142,8 +160,6 @@ function checkWin() {
 function checkDeath() {
   if (health <= 0) {
     document.querySelector('#modalLose').classList.add('is-active')
-    const loseSound = document.getElementById("soundLose"); 
-    loseSound.volume = 0.3;
     loseSound.play();
     resetGame()
   } 
@@ -173,8 +189,6 @@ startGame.addEventListener('click', () => {
   if (chosenClass === 'Mage') {
   player.style.backgroundImage = 'url(./assets/mage1.png)'
   }
-  const soundDefault = document.getElementById('soundDefault')
-  soundDefault.volume = 0.2;
   soundDefault.loop = true;
   soundDefault.play();
 })
@@ -201,16 +215,12 @@ function checkItem() {
     document.getElementById(`div${playerLine}-${playerColumn}`).classList.remove('item')
     level += 10
     map[playerLine] = map[playerLine].replace(/I/,'i')
-    const itemSound = document.getElementById("soundItem"); 
-    itemSound.volume = 0.3;
     itemSound.play();
   }
   if (map[playerLine][playerColumn] === 'P') {
     document.getElementById(`div${playerLine}-${playerColumn}`).classList.remove('potion')
     health += 15
     map[playerLine] = map[playerLine].replace(/P/,'p')
-    const itemSound = document.getElementById("soundItem"); 
-    itemSound.volume = 0.3;
     itemSound.play();
   }
   if (map[playerLine][playerColumn] === 'M') {
@@ -218,8 +228,6 @@ function checkItem() {
     health -= 15
     level += 7
     map[playerLine] = map[playerLine].replace(/M/,'m')
-    const creatureDeadSound = document.getElementById("soundCreatureDead"); 
-    creatureDeadSound.volume = 0.2;
     creatureDeadSound.play();
   }
   if (map[playerLine][playerColumn] === 'L') {
@@ -227,8 +235,6 @@ function checkItem() {
     health -= 50
     level += 13
     map[playerLine] = map[playerLine].replace(/L/,'l')
-    const creatureDeadSound = document.getElementById("soundCreatureDead"); 
-    creatureDeadSound.volume = 0.2;
     creatureDeadSound.play();
   }
   if (map[playerLine][playerColumn] === 'B') {
@@ -236,8 +242,6 @@ function checkItem() {
     health -= 80;
     level += 50;
     map[playerLine] = map[playerLine].replace(/B/,'b')
-    const bossSound = document.getElementById("soundBoss"); 
-    bossSound.volume = 0.5;
     bossSound.play();
   }
   if (health < 0) {health = 0}
@@ -249,8 +253,6 @@ function checkItem() {
 let evolveStage = 1;
 
 function checkEvolve() {
-  const levelUpSound = document.getElementById("soundLevelUp"); 
-  levelUpSound.volume = 0.3;
   if (level < 40) {
     if (chosenClass === 'Warrior') {
       player.style.backgroundImage = 'url(./assets/warrior1.png)'
@@ -323,7 +325,6 @@ document.getElementById('logout').addEventListener('click', () => {
   checkEvolve()
   document.getElementById('username').value = ''
   document.getElementById('password').value = ''
-  // document.getElementById('soundDefault').pause()
 })
 
 document.getElementById('help').addEventListener('click', () => {
@@ -336,17 +337,28 @@ document.getElementById('modalBgHelp').addEventListener('click', () => {
 })
 
 document.getElementById('sound').addEventListener('click', () => {
-  const sound = document.getElementById('soundDefault')
-  if (sound.volume > 0) {
-    sound.volume = 0
+  if (soundDefault.volume > 0) {
+    itemSound.volume = 0
+    soundDefault.volume = 0
+    winSound.volume = 0
+    loseSound.volume = 0
+    creatureDeadSound.volume = 0  
+    bossSound.volume = 0 
+    levelUpSound.volume = 0
+    document.getElementById('sound').innerText = 'Sound:Off' 
     return
   }
-  sound.volume = 0.3
+  soundDefault.volume = 0.2
+  winSound.volume = 0.2
+  loseSound.volume = 0.2
+  itemSound.volume = 0.2
+  creatureDeadSound.volume = 0.2  
+  bossSound.volume = 0.4 
+  levelUpSound.volume = 0.2 
+  document.getElementById('sound').innerText = 'Sound:On' 
 })
 
-// CREATE ANOTHER VARIABLE TO RESET MAP
+// TRANSITION FOR MONSTERS, ITEMS AND RESET
 
-// LEVEL BY STEPS SHOW ON THE RIGHT (guardado numa variável global)
-// MONSTERS BY LEVEL
 // SECRET PASSAGES (DOORS, ITEMS)
 // TRAPS AROUND THE MAP

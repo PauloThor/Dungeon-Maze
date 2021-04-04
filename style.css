@@ -118,6 +118,10 @@ img#boss {
     font-family: monospace, sans-serif;
 }
 
+#modalLose {
+    transition: all 1s;
+}
+
 #lose {
     top: 10%;
     background-image: url(./assets/gameover.jpg);
@@ -200,6 +204,10 @@ button#startGame {
     color: grey;
 }
 
+button#startGame:hover {
+    color: orange;
+}
+
 div.userInfo {
     width: 180px;
     padding: 5px;
@@ -225,6 +233,7 @@ div.template {
 
 div.userInfo div.health {
     width: 165px;
+    transition: all 1s;
 }
 
 div.userInfo div#healthbar {
@@ -232,6 +241,7 @@ div.userInfo div#healthbar {
     background-color: rgb(145, 16, 16);
     width: 100%;
     z-index: 2;
+    transition: all 1s;
 }
 
 div.logout {
