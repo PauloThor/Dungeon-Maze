@@ -182,20 +182,12 @@ startGame.addEventListener('click', () => {
 modalBg.addEventListener('click', () => {
   modal.classList.remove('is-active')
   document.querySelector('#modalWin').classList.remove('is-active')
-  // const startingPosition = document.getElementById('div9-0');
-  // startingPosition.appendChild(player)
-  // playerLine = 9;
-  // playerColumn = 0;
   resetGame()
 })
 
 modalBgLose.addEventListener('click', () => {
   modal.classList.remove('is-active')
   document.querySelector('#modalLose').classList.remove('is-active')
-  // const startingPosition = document.getElementById('div9-0');
-  // startingPosition.appendChild(player)
-  // playerLine = 9;
-  // playerColumn = 0;
   resetGame()
 })
 
@@ -341,6 +333,15 @@ document.getElementById('help').addEventListener('click', () => {
 document.getElementById('modalBgHelp').addEventListener('click', () => {
   document.getElementById('modalHelp').classList.remove('is-active')
 
+})
+
+document.getElementById('sound').addEventListener('click', () => {
+  const sound = document.getElementById('soundDefault')
+  if (sound.volume > 0) {
+    sound.volume = 0
+    return
+  }
+  sound.volume = 0.3
 })
 
 // CREATE ANOTHER VARIABLE TO RESET MAP
