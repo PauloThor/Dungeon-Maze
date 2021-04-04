@@ -287,4 +287,5 @@ div#modalBgHelp h1 {
 
 div#modalBgHelp p {
     background-color: #181A1B;
+    border-radius: 10px;
 }
