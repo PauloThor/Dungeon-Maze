@@ -314,6 +314,20 @@ function start() {
 
 window.addEventListener('load',start)
 
+document.getElementById('logout').addEventListener('click', () => {
+  document.getElementById('login').classList.add('is-active')
+  const startingPosition = document.getElementById('div9-0');
+  startingPosition.appendChild(player)
+  playerLine = 9;
+  playerColumn = 0;
+  resetGame()
+  appendPlayer()
+  checkEvolve()
+  document.getElementById('username').value = ''
+  document.getElementById('password').value = ''
+  // document.getElementById('soundDefault').pause()
+})
+
 
 // CREATE ANOTHER VARIABLE TO RESET MAP
 

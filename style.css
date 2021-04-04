@@ -1,9 +1,13 @@
+html {
+    background-color: #181A1B;
+}
+
 body {
     display: flex;
     /* justify-content: center; */
     background-color: #181A1B;
     background-image: url(./assets/background-default.webp);
-    height: 630px;
+    height: 635px;
 }
 
 label, input, form, option, h2, select {
@@ -129,7 +133,7 @@ img#boss {
 }
 
 .slideRight {
-    animation: slideRight 0.1s;
+    animation: slideRight 0.3s;
 }
 
 .slideLeft {
@@ -148,8 +152,10 @@ img#boss {
 }
 
 @keyframes slideRight {
-    from {margin-left: 20px;}
-    to {margin-left: 0;}
+    /* from {margin-left: 20px;}
+    to {margin-left: 0;} */
+    0% {transform: rotate(30deg);}
+    100% {transform: rotate(0deg);}
     }
 
 @keyframes slideLeft {
@@ -225,4 +231,20 @@ div#userInfo div#healthbar {
     background-color: rgb(145, 16, 16);
     width: 100%;
     z-index: 2;
+}
+
+div.logout {
+    position: absolute;
+    bottom: 10px;
+    width: 175px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+h2#logout {
+    font-size: 30px;
+    
 }
