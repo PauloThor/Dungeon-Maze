@@ -162,6 +162,7 @@ const creatureDeadSound = document.getElementById("soundCreatureDead");
 const lordDeadSound = document.getElementById('soundLordDead')
 const bossSound = document.getElementById("soundBoss"); 
 const levelUpSound = document.getElementById("soundLevelUp"); 
+const beepSound = $("#soundBeep")[0];
 
 winSound.volume = 0.2;
 loseSound.volume = 0.2;
@@ -172,6 +173,7 @@ creatureDeadSound.volume = 0.2;
 lordDeadSound.volume = 0.2
 bossSound.volume = 0.5;
 levelUpSound.volume = 0.2;
+beepSound.volume = 0.2
 
 // SOUND VARIABLES
 
@@ -375,6 +377,7 @@ document.getElementById('sound').addEventListener('click', () => {
     lordDeadSound.volume = 0
     bossSound.volume = 0 
     levelUpSound.volume = 0
+    beepSound.volume = 0
     document.getElementById('sound').innerText = 'Sound:Off' 
     return
   }
@@ -387,8 +390,28 @@ document.getElementById('sound').addEventListener('click', () => {
   lordDeadSound.volume = 0.2
   bossSound.volume = 0.4 
   levelUpSound.volume = 0.2 
+  beepSound.volume = 0.2
   document.getElementById('sound').innerText = 'Sound:On' 
 })
+
+// const beepSound = document.getElementById('soundItem');
+// document.getElementById('help').onmouseenter(function() {
+//   beepSound.play();
+// });
+
+// function playBeep() {
+//   console.log('a')
+//   // potionSound.play()
+// }
+
+// $('#sound').mouseenter(playBeep)
+
+
+$(".userInfo.logout h2, #startGame").mouseenter(function() {
+  beepSound.play();
+});
+
+
 
 // TRANSITION FOR MONSTERS, ITEMS AND RESET
 
