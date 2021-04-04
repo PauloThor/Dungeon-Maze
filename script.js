@@ -6,11 +6,11 @@ let map = [
     "W WMWWWWWLW WWW W W W  IW W",
     "W         W     W W W W W W",
     "WMWWW WWWWW WWWWW W W W W W",
-    "W WP  W   W W M   W W W W W",
+    "W WP  WI  W W M   W W W W W",
     "W WWWWW W W W W WPW   W W W",
     "S     W W W W W W WWW W  PW",
     "WWWWW W W W W W W WPW WMW W",
-    "W   M W W W L W W W W W   W",
+    "W   M WPW W L W W W W W   W",
     "W WWWWWWW WWWWW W W W W W W",
     "W  M   PW       W   W    IW",
     "WWWWWWWWWWWWWWWWWWWWWWWWWWW",
@@ -157,7 +157,9 @@ const winSound = document.getElementById("soundWin");
 const loseSound = document.getElementById("soundLose"); 
 const soundDefault = document.getElementById('soundDefault')
 const itemSound = document.getElementById("soundItem"); 
+const potionSound = document.getElementById('soundPotion');
 const creatureDeadSound = document.getElementById("soundCreatureDead"); 
+const lordDeadSound = document.getElementById('soundLordDead')
 const bossSound = document.getElementById("soundBoss"); 
 const levelUpSound = document.getElementById("soundLevelUp"); 
 
@@ -165,8 +167,9 @@ winSound.volume = 0.2;
 loseSound.volume = 0.2;
 soundDefault.volume = 0.2;
 itemSound.volume = 0.2;
+potionSound.volume = 0.2;
 creatureDeadSound.volume = 0.2;
-creatureDeadSound.duration = 0.1
+lordDeadSound.volume = 0.2
 bossSound.volume = 0.5;
 levelUpSound.volume = 0.2;
 
@@ -244,13 +247,13 @@ function checkItem() {
   }
   if (map[playerLine][playerColumn] === 'P') {
     document.getElementById(`div${playerLine}-${playerColumn}`).classList.remove('potion')
-    health += 15
+    health += 20
     map[playerLine] = map[playerLine].replace(/P/,'p')
-    itemSound.play();
+    potionSound.play();
   }
   if (map[playerLine][playerColumn] === 'M') {
     document.getElementById(`div${playerLine}-${playerColumn}`).classList.remove('monster')
-    health -= 15
+    health -= 20
     level += 7
     map[playerLine] = map[playerLine].replace(/M/,'m')
     creatureDeadSound.play();
@@ -260,7 +263,7 @@ function checkItem() {
     health -= 50
     level += 13
     map[playerLine] = map[playerLine].replace(/L/,'l')
-    creatureDeadSound.play();
+    lordDeadSound.play();
   }
   if (map[playerLine][playerColumn] === 'B') {
     document.getElementById('boss').style.display = 'none'
@@ -364,10 +367,12 @@ document.getElementById('modalBgHelp').addEventListener('click', () => {
 document.getElementById('sound').addEventListener('click', () => {
   if (soundDefault.volume > 0) {
     itemSound.volume = 0
+    potionSound.volume = 0
     soundDefault.volume = 0
     winSound.volume = 0
     loseSound.volume = 0
     creatureDeadSound.volume = 0  
+    lordDeadSound.volume = 0
     bossSound.volume = 0 
     levelUpSound.volume = 0
     document.getElementById('sound').innerText = 'Sound:Off' 
@@ -377,7 +382,9 @@ document.getElementById('sound').addEventListener('click', () => {
   winSound.volume = 0.2
   loseSound.volume = 0.2
   itemSound.volume = 0.2
+  potionSound.volume = 0.2
   creatureDeadSound.volume = 0.2  
+  lordDeadSound.volume = 0.2
   bossSound.volume = 0.4 
   levelUpSound.volume = 0.2 
   document.getElementById('sound').innerText = 'Sound:On' 
