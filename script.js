@@ -327,7 +327,9 @@ function checkEvolve() {
 }
 
 document.addEventListener('keydown', (event) => {
-  if (map[playerLine][playerColumn] !== 'F') movePlayer[event.key]()
+  if (map[playerLine][playerColumn] !== 'F' && map[playerLine][playerColumn] !== undefined) {
+    movePlayer[event.key]()
+  }
   appendPlayer()
   checkWin()
   checkItem()
