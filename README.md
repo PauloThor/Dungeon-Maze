@@ -1,8 +1,9 @@
 # Dungeon Maze
+Pages: <a>https://paulothor.gitlab.io/labirinto</a>
 
 ## About
 
-Dungeon Maze is about making maze-based game with RPG elements. As a plyer you can defeat monsters, progress your level, choose classes and interact with items during the game. Your path and decision making matters so think carefully before facing a monster or taking an item from the floor.
+Dungeon Maze is about making maze-based game with RPG elements. As a player you can defeat monsters, progress your level, choose classes and interact with items during the game. Your path and decision making matters so think carefully before facing a monster or taking an item from the floor.
 
 ### Technologies
 
