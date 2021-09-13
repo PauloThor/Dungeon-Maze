@@ -2,7 +2,7 @@
 
 ## About
 
-Dungeon Maze is a maze game with RPG elements. The player can defeat monsters, progress his level, choose class and interact with items during the game. You path and decision making matters so think carefully before facing a monster or taking an item from the floor.
+Dungeon Maze is about making maze-based game with RPG elements. As a plyer you can defeat monsters, progress your level, choose classes and interact with items during the game. Your path and decision making matters so think carefully before facing a monster or taking an item from the floor.
 
 ### Technologies
 
